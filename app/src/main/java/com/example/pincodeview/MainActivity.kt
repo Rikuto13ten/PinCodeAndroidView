@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pincodeview.databinding.ActivityMainBinding
 
@@ -21,13 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        listOf(
+        val textViews = listOf(
             binding.pinCodeTextView1,
             binding.pinCodeTextView2,
             binding.pinCodeTextView3,
             binding.pinCodeTextView4
         ).also {
-            it.forEachIndexed { index, textView ->
+            it.forEachIndexed { _, textView ->
                 textView.setOnClickListener {
                     binding.pinCodeEditText.requestFocus()
                     val inputMethodManager =
@@ -40,19 +41,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.pinCodeEditText.addTextChangedListener(onTextWatcher(binding))
+        binding.pinCodeEditText.addTextChangedListener(onTextWatcher(textViews))
     }
 
-    private fun onTextWatcher(binding: ActivityMainBinding) = object : TextWatcher {
+    private fun onTextWatcher(textViews: List<TextView>) = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
         override fun afterTextChanged(p0: Editable?) = Unit
 
         override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
             s?.let { text ->
-                binding.pinCodeTextView1.text = text.getString(0)
-                binding.pinCodeTextView2.text = text.getString(1)
-                binding.pinCodeTextView3.text = text.getString(2)
-                binding.pinCodeTextView4.text = text.getString(3)
+                textViews.forEachIndexed { index, textView ->
+                    textView.text = text.getString(index)
+                }
             }
         }
     }

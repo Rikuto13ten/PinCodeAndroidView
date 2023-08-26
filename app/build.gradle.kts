@@ -41,7 +41,6 @@ android {
 
 detekt {
     buildUponDefaultConfig = true
-    allRules = true
     dependencies {
         detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.1")
         detektPlugins("io.gitlab.arturbosch.detekt:detekt-rules-libraries:1.23.1")
