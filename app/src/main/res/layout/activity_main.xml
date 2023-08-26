@@ -11,19 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:autofillHints=""
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:inputType="number"
-        android:maxLength="4"
-        android:visibility="visible" />
+        android:maxLength="4" />
 
     <LinearLayout
+        android:id="@+id/pinCodeTextViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true">
 
         <TextView
             android:id="@+id/pinCodeTextView1"
