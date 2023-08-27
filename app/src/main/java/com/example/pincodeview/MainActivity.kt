@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,12 +32,7 @@ class MainActivity : AppCompatActivity() {
             it.forEachIndexed { _, textView ->
                 textView.setOnClickListener {
                     binding.pinCodeEditText.requestFocus()
-                    val inputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputMethodManager.showSoftInput(
-                        binding.pinCodeEditText,
-                        InputMethodManager.SHOW_IMPLICIT
-                    )
+                    binding.pinCodeEditText.showKeyboard()
                 }
             }
         }
@@ -60,6 +56,15 @@ class MainActivity : AppCompatActivity() {
     private fun CharSequence.getString(index: Int) = if (this.length > index) {
         this[index].toString()
     } else {
-        " "
+        ""
+    }
+
+    private fun View.showKeyboard(): Boolean {
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        return inputMethodManager.showSoftInput(
+            this,
+            InputMethodManager.SHOW_IMPLICIT
+        )
     }
 }
